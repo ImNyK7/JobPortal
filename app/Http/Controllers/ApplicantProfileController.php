@@ -17,20 +17,26 @@ class ApplicantProfileController extends Controller
 
     public function update(Request $request)
     {
+        $profile = ApplicantProfile::where('user_id', Auth::id())->firstOrFail();
+
         $request->validate([
-            'address' => 'required|string|max:255',
-            'date_of_birth' => 'required|date',
-            'last_education' => 'required|string|max:100',
-            'previous_job' => 'nullable|string|max:100',
+            'address' => 'nullable|string',
+            'date_of_birth' => 'nullable|date',
+            'last_education' => 'nullable|string|max:255',
+            'previous_job' => 'nullable|string|max:255',
             'skills' => 'nullable|string|max:255',
-            'about' => 'nullable|string|max:500',
+            'about' => 'nullable|string',
+            'cv' => 'nullable|mimes:pdf|max:2048',
         ]);
 
-        $profile = ApplicantProfile::updateOrCreate(
-            ['user_id' => Auth::id()],
-            $request->only('address', 'date_of_birth', 'last_education', 'previous_job', 'skills', 'about')
-        );
+        // Save CV if uploaded
+        if ($request->hasFile('cv')) {
+            $path = $request->file('cv')->store('cv_uploads', 'public');
+            $profile->cv_path = $path;
+        }
 
-        return redirect()->route('settings')->with('success', 'Profile updated successfully!');
+        $profile->update($request->except('cv'));
+
+        return back()->with('success', 'Profile updated successfully!');
     }
 }

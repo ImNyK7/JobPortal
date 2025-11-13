@@ -17,8 +17,9 @@ return new class extends Migration
             $table->text('description');
             $table->string('location')->nullable();
             $table->string('employment_type')->default('Full-time'); // Full-time, Part-time, Internship, etc.
-            $table->decimal('salary', 12, 2)->nullable();
+            $table->decimal('salary', 12, places: 2)->nullable();
             $table->date('deadline')->nullable();
+            $table->boolean('is_hidden')->default(false);
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade'); // HR or Admin who posted the job
             $table->timestamps();
         });

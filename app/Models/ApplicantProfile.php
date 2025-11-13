@@ -17,7 +17,9 @@ class ApplicantProfile extends Model
         'previous_job',
         'skills',
         'about',
+        'cv_path',
     ];
+
 
     public function user()
     {

@@ -12,10 +12,11 @@
                 </div>
                 <!-- Profile Name -->
                 <h2 class="text-2xl font-bold text-gray-800">{{ Auth::user()->name }}</h2>
+                <h2 class="text-2l font-bold text-gray-800">{{ Auth::user()->email }}</h2>
             </div>
 
             <!-- Profile Form -->
-            <form action="{{ route('settings.update') }}" method="POST" class="space-y-4">
+            <form action="{{ route('settings.update') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
 
                 <div>
@@ -44,11 +45,11 @@
                 <div>
                     <div class="flex items-center gap-2 mb-1">
                         <label class="text-gray-700 font-medium">Previous Job</label>
-                        <label class="text-gray-400 font-medium text-sm">Contoh: Web Developer, PT Pencari Cinta Sejati</label>
+                        <label class="text-gray-400 font-medium text-sm">Contoh: Web Developer, PT Pencari Cinta
+                            Sejati</label>
                     </div>
 
-                    <input type="text" name="previous_job"
-                        value="{{ old('previous_job', $profile->previous_job) }}"
+                    <input type="text" name="previous_job" value="{{ old('previous_job', $profile->previous_job) }}"
                         class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
                 </div>
 
@@ -58,8 +59,7 @@
                         <label class="text-gray-400 font-medium text-sm">Contoh: Laravel, PHP, HTML, MySQL</label>
                     </div>
 
-                    <input type="text" name="skills"
-                        value="{{ old('skills', $profile->skills) }}"
+                    <input type="text" name="skills" value="{{ old('skills', $profile->skills) }}"
                         class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
                 </div>
 
@@ -68,6 +68,24 @@
                     <textarea name="about" rows="3"
                         class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">{{ old('about', $profile->about) }}</textarea>
                 </div>
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-1">Upload CV (PDF only)</label>
+
+                    @if ($profile->cv_path)
+                        <p class="text-green-700 mb-2">
+                            ✓ CV already uploaded —
+                            <a href="{{ asset('storage/' . $profile->cv_path) }}" class="text-blue-600 underline"
+                                target="_blank">
+                                View CV
+                            </a>
+                        </p>
+                    @endif
+
+                    <input type="file" name="cv" accept="application/pdf"
+                        class="w-full border border-gray-300 rounded-md px-3 py-2 bg-white">
+                </div>
+
 
                 <div class="flex justify-end">
                     <button type="submit"

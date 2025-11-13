@@ -12,7 +12,6 @@
                     <div class="flex justify-between">
                         <div>
                             <h3 class="text-xl font-bold text-gray-900">{{ $job->title }}</h3>
-                            <p class="text-gray-700 font-semibold">{{ $job->description }}</p>
 
                             <p class="text-gray-600 mt-2">
                                 <span class="font-semibold">Location:</span>

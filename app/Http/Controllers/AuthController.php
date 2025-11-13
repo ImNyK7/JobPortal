@@ -35,17 +35,15 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Attempt login
         if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }
 
-        // If login fails
-        return back()->withErrors([
-            'email' => 'Invalid email or password.',
-        ])->onlyInput('email');
+        // If login fails → return SweetAlert message
+        return back()->with('login_error', 'Invalid email or password.');
     }
+
 
     public function logout(Request $request)
     {

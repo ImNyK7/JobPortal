@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('previous_job')->nullable();
             $table->text('skills')->nullable();
             $table->text('about')->nullable();
+            $table->string('cv_path')->nullable();
             $table->timestamps();
         });
     }

@@ -17,7 +17,9 @@ class Job extends Model
         'salary',
         'deadline',
         'created_by',
+        'is_hidden',
     ];
+
 
     public function creator()
     {

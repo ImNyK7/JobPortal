@@ -43,6 +43,14 @@
                 <span>Job List</span>
             </a>
 
+            <!-- User List -->
+            <a href="{{ route('users.index') }}"
+                class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition">
+                <i class="fa-solid fa-users w-5"></i>
+                <span>User List</span>
+            </a>
+
+
             <!-- Divider -->
             <div class="border-t my-3"></div>
 
