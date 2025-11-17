@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="px-8 py-6">
+    <div class="max-w-5xl mx-auto bg-white shadow-md rounded-xl p-8">
 
         <h2 class="text-2xl font-bold text-gray-800 mb-6">Job List</h2>
 
         @forelse ($jobs as $job)
             <a href="{{ route('jobs.show', $job->id) }}" class="block hover:scale-[1.01] transition">
-                <div class="bg-white shadow-md rounded-lg p-6 mb-5 border border-gray-200 cursor-pointer">
+                <div class="bg-gray-50 shadow-sm rounded-lg p-6 mb-5 border border-gray-200 cursor-pointer">
 
                     <div class="flex justify-between">
                         <div>
